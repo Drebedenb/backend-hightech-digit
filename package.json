@@ -1,0 +1,29 @@
+{
+  "name": "backend-hightech-digit",
+  "version": "1.0.0",
+  "description": "Mern stack",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Drebedenb/backend-hightech-digit.git"
+  },
+  "author": "Danila Kuznetsov <danila.kuzya@mail.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Drebedenb/backend-hightech-digit/issues"
+  },
+  "homepage": "https://github.com/Drebedenb/backend-hightech-digit#readme",
+  "dependencies": {
+    "config": "^3.3.8",
+    "express": "^4.18.2",
+    "mysql2": "^3.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}
