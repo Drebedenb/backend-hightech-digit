@@ -1,41 +1,24 @@
 const express = require("express")
 const config = require("config")
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const mongoose = require("mongoose")
+
 
 const app = express();
 
-app.use("/api/auth")
+app.use("/api/auth", require("./routes/auth.routes"));
 
 const PORT = config.get('PORT') || 5000;
 
-const uri = config.get("mongoUri")
-
 async function start (){
     try {
-        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-        client.connect(err => {
-            const collection = client.db("test").collection("devices");
-            client.close();
-        });
+        mongoose.set("strictQuery", false);
+        await mongoose.connect(config.get("mongoUri"), {useUnifiedTopology: true, useNewUrlParser: true});
+        console.log("Exit from loop")
         app.listen(PORT, () => console.log(`app has been started on port: ${PORT}`))
     } catch (e) {
         console.log("Server Error", e.message)
         process.exit(1)
     }
 }
-
-//
-// async function start (){
-//     try {
-//         mongoose.set("strictQuery", false);
-//         await mongoose.connect(config.get("mongoUri"), () => {
-//             console.log("Connect DB")
-//         });
-//         app.listen(PORT, () => console.log(`app has been started on port: ${PORT}`))
-//     } catch (e) {
-//         console.log("Server Error", e.message)
-//         process.exit(1)
-//     }
-// }
 
 start();
