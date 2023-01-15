@@ -1,5 +1,5 @@
 {
-  "PORT": 3000,
+  "PORT": 5000,
   "mongoUri": "mongodb+srv://Kuzma:22022001@cluster0.dn0izva.mongodb.net/?retryWrites=true&w=majority",
   "jwtSecret": "VNR4S6iu5NVr4V3I2N"
 }

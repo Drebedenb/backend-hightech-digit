@@ -2,15 +2,27 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useState} from 'react';
 import logo from '../../images/logo.png';
 import "./signUp.css";
+import {useHttp} from "../../hooks/http.hook";
 
 const SignUp = () => {
+    const {loading, request} = useHttp();
     const [form, setForm] = useState({
         email: "",
         password: "",
         passwordCheck: ""
     });
     const changeHandler = event => {
-        setForm({...form, [event.target.name]: event.target.value })
+        setForm({...form, [event.target.name]: event.target.value})
+        console.log("Changes...")
+    }
+    const registerHandler = async () => {
+        try {
+            console.log("Im here")
+            const data = await request("/api/auth/register", "POST",
+                {"email": form.email, "password": form.password});
+            console.log("Data", data);
+        } catch (e) {
+        }
     }
     return (
         <div className="Auth-form-container">
@@ -47,7 +59,6 @@ const SignUp = () => {
                             onChange={changeHandler}
                             type="password"
                             className="form-control"
-                            id="floatingPassword"
                             placeholder="Password"
                             name="passwordCheck"
                         />
@@ -55,7 +66,11 @@ const SignUp = () => {
                     </div>
 
                     <div className="d-grid gap-2 mt-3">
-                        <button type="submit" className="btn btn-primary">
+                        <button
+                            className="btn btn-primary"
+                            onClick={registerHandler}
+                            disabled={loading}
+                        >
                             Sign Up
                         </button>
                     </div>
