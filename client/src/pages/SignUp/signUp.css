@@ -33,3 +33,7 @@ label {
     font-weight: 600;
     color: rgba(34, 34, 34, 0.6);
 }
+
+.form-floating{
+    margin-bottom: 0.1rem;
+}
