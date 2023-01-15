@@ -1,16 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from '../../images/logo.png';
 import "./signUp.css";
 import {useHttp} from "../../hooks/http.hook";
 
 const SignUp = () => {
-    const {loading, request} = useHttp();
+    const {loading, request, error} = useHttp();
     const [form, setForm] = useState({
         email: "",
         password: "",
         passwordCheck: ""
     });
+    useEffect(() => {
+
+    }, [error])
     const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
         console.log("Changes...")
