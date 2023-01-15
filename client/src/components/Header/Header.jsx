@@ -30,7 +30,7 @@ const Header = () => {
 
                         <div className="text-end">
                             <NavLink to="/login" className="btn btn-outline-light me-2">Login</NavLink>
-                            <NavLink to="/login" type="button" className="btn btn-warning">Sign-up</NavLink>
+                            <NavLink to="/signUp" type="button" className="btn btn-warning">Sign-up</NavLink>
                         </div>
                     </div>
                 </div>
