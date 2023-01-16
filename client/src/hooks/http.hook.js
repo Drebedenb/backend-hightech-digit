@@ -17,6 +17,7 @@ export const useHttp = () => {
                 throw new Error(data.message || "Something wrong")
             }
             setLoading(false);
+            console.log("Return data in http hook", data);
             return data;
         } catch (e) {
             setLoading(false);

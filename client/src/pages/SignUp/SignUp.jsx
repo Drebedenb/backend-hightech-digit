@@ -3,17 +3,17 @@ import React, {useEffect, useState} from 'react';
 import logo from '../../images/logo.png';
 import "./signUp.css";
 import {useHttp} from "../../hooks/http.hook";
+import {ToastContainer, toast} from "react-toastify";
+import Toast from "../../components/Toast/Toast";
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
-    const {loading, request, error} = useHttp();
+    const {loading, request, error, clearError} = useHttp();
     const [form, setForm] = useState({
         email: "",
         password: "",
         passwordCheck: ""
     });
-    useEffect(() => {
-
-    }, [error])
     const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
         console.log("Changes...")
@@ -27,8 +27,17 @@ const SignUp = () => {
         } catch (e) {
         }
     }
+    const notify = (message) => toast.error(message)
+    useEffect(() => {
+        console.log(error)
+        if (error !== null){
+            notify(error);
+            clearError();
+        }
+    }, [error]);
     return (
         <div className="Auth-form-container">
+            <ToastContainer />
             <form className="Auth-form">
                 <div className="Auth-form-content">
                     <img className="rounded mx-auto d-block" src={logo} alt=""/>
@@ -70,6 +79,7 @@ const SignUp = () => {
 
                     <div className="d-grid gap-2 mt-3">
                         <button
+                            type="submit"
                             className="btn btn-primary"
                             onClick={registerHandler}
                             disabled={loading}
