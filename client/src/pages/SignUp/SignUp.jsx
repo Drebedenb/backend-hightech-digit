@@ -4,7 +4,6 @@ import logo from '../../images/logo.png';
 import "./signUp.css";
 import {useHttp} from "../../hooks/http.hook";
 import {ToastContainer, toast} from "react-toastify";
-import Toast from "../../components/Toast/Toast";
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
@@ -16,7 +15,6 @@ const SignUp = () => {
     });
     const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
-        console.log("Changes...")
     }
     const registerHandler = async () => {
         if (form.password !== form.passwordCheck){
@@ -29,14 +27,14 @@ const SignUp = () => {
         } catch (e) {
         }
     }
+
     const notify = (message) => toast.error(message);
     useEffect(() => {
-        console.log(error)
         if (error !== null){
             notify(error);
             clearError();
         }
-    }, [error]);
+    }, [error, clearError]);
     return (
         <div className="Auth-form-container">
             <ToastContainer />
@@ -83,7 +81,7 @@ const SignUp = () => {
                         <button
                             type="submit"
                             className="btn btn-primary"
-                            onSubmit={registerHandler}
+                            onClick={registerHandler}
                             disabled={loading}
                         >
                             Sign Up
