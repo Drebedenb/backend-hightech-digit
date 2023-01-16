@@ -19,15 +19,17 @@ const SignUp = () => {
         console.log("Changes...")
     }
     const registerHandler = async () => {
+        if (form.password !== form.passwordCheck){
+            return toast.warning("Passwords are not same!");
+        }
         try {
-            console.log("Im here")
             const data = await request("/api/auth/register", "POST",
                 {"email": form.email, "password": form.password});
             console.log("Data", data);
         } catch (e) {
         }
     }
-    const notify = (message) => toast.error(message)
+    const notify = (message) => toast.error(message);
     useEffect(() => {
         console.log(error)
         if (error !== null){
@@ -81,7 +83,7 @@ const SignUp = () => {
                         <button
                             type="submit"
                             className="btn btn-primary"
-                            onClick={registerHandler}
+                            onSubmit={registerHandler}
                             disabled={loading}
                         >
                             Sign Up
