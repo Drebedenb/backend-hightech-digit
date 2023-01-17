@@ -1,11 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import logo from '../../images/logo.png';
 import "./login.css";
 import {useHttp} from "../../hooks/http.hook";
 import {toast, ToastContainer} from "react-toastify";
+import {AuthContext} from "../../context/AuthContext";
 
 const Login = () => {
+    const auth = useContext(AuthContext);
     const {loading, request, error, clearError} = useHttp();
     const [form, setForm] = useState({
         email: "",
@@ -16,10 +18,9 @@ const Login = () => {
     }
     const loginHandler = async () => {
         try {
-            console.log(form.email, form.password);
             const data = await request("/api/auth/login", "POST",
                 {"email": form.email, "password": form.password});
-            console.log("Data", data);
+            auth.login(data.token, data.userId)
         } catch (e) {
         }
     }

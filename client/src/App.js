@@ -1,6 +1,8 @@
 import React, {createContext, useState} from "react"
 import {BrowserRouter} from "react-router-dom";
 import {useRoutes} from "./routes";
+import {useAuth} from "./hooks/auth.hook";
+import {AuthContext} from "./context/AuthContext";
 
 let data = [{id: 1, name: "phone", price: 500},
     {id: 2, name: "notebook", price: 1000},
@@ -11,23 +13,20 @@ export const ProductsContext = createContext(null);
 
 function App() {
     const [cards, setCards] = useState(data);
-    const routes = useRoutes(false);
+    const {token, login, logout, userId} = useAuth();
+    const isAuthenticated = !!token;
+    const routes = useRoutes(isAuthenticated);
 
     return (
-        <ProductsContext.Provider value={{cards, setCards}}>
-            <BrowserRouter>
-                <div className="App">
-                    {routes}
-                    {/*<Routes>*/}
-                    {/*    <Route path="/" element={<Main/>}/>*/}
-                    {/*    <Route path="*" element={<Main/>}/>*/}
-                    {/*    <Route path="/*" element={<Main/>}/>*/}
-                    {/*    <Route path="/login" element={<Login/>}/>*/}
-                    {/*    <Route path="/signUp" element={<SignUp/>}/>*/}
-                    {/*</Routes>*/}
-                </div>
-            </BrowserRouter>
-        </ProductsContext.Provider>
+        <AuthContext.Provider value={{token, login, logout, userId, isAuthenticated}}>
+            <ProductsContext.Provider value={{cards, setCards}}>
+                <BrowserRouter>
+                    <div className="App">
+                        {routes}
+                    </div>
+                </BrowserRouter>
+            </ProductsContext.Provider>
+        </AuthContext.Provider>
     );
 }
 
