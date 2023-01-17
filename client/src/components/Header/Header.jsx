@@ -5,7 +5,6 @@ import {AuthContext} from "../../context/AuthContext";
 
 const Header = () => {
     const auth = useContext(AuthContext);
-    console.log(auth);
     return (
         <div className="header">
             <header className="p-3 text-bg-dark">
@@ -40,7 +39,8 @@ const Header = () => {
                         {auth.isAuthenticated
                             ?
                             <div className="text-end">
-                                <NavLink to="/account" className="btn btn-outline-light me-2">Cabinet of {auth.userId}</NavLink>
+                                <NavLink to="/account" className="btn btn-outline-light me-2">{auth.userId}'s account</NavLink>
+                                <button onClick={auth.logout} type="button" className="btn btn-outline-danger">Log out</button>
                             </div>
                             :
                             <div className="text-end">
