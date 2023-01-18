@@ -5,8 +5,10 @@ import "./login.css";
 import {useHttp} from "../../hooks/http.hook";
 import {toast, ToastContainer} from "react-toastify";
 import {AuthContext} from "../../context/AuthContext";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const auth = useContext(AuthContext);
     const {loading, request, error, clearError} = useHttp();
     const [form, setForm] = useState({
@@ -21,6 +23,7 @@ const Login = () => {
             const data = await request("/api/auth/login", "POST",
                 {"email": form.email, "password": form.password});
             auth.login(data.token, data.userId)
+            navigate("/", {replace: true});
         } catch (e) {
         }
     }

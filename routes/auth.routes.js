@@ -20,12 +20,11 @@ router.post(
             if (!errors.isEmpty()) {
                 return res.status(400).json({
                     errors: errors.array(),
-                    message: "Incorrect input"
+                    message: errors.errors[0].msg
                 })
             }
 
             const {email, password} = req.body;
-            console.log("On server: ", email, password);
             const candidate = await User.findOne({email});
             if (candidate) {
                 return res.status(400).json({message: "Email already registered"})
@@ -33,6 +32,7 @@ router.post(
             const hashedPassword = await bcrypt.hash(password, 12)
             const user = new User({email, password: hashedPassword})
 
+            console.log(user)
             await user.save();
             res.status(201).json({message: "User created"})
         } catch (e) {

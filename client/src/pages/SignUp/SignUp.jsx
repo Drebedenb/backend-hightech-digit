@@ -9,6 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 const SignUp = () => {
     const {loading, request, error, clearError} = useHttp();
     const [form, setForm] = useState({
+        name: "",
+        surname: "",
+        nameOfOrganization: "",
         email: "",
         password: "",
         passwordCheck: ""
@@ -16,9 +19,13 @@ const SignUp = () => {
     const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
     }
-    const registerHandler = async () => {
-        if (form.password !== form.passwordCheck){
-            return toast.warning("Passwords are not same!");
+    const registerHandler = async (event) => {
+        if (form.password.length < 6 || form.passwordCheck.length < 6) {
+            return 0;
+        }
+        if (form.password !== form.passwordCheck) {
+            toast.warning("Passwords are not same!");
+            return 0;
         }
         try {
             const data = await request("/api/auth/register", "POST",
@@ -30,11 +37,12 @@ const SignUp = () => {
 
     const notify = (message) => toast.error(message);
     useEffect(() => {
-        if (error !== null){
+        if (error !== null) {
             notify(error);
             clearError();
         }
     }, [error, clearError]);
+
     return (
         <div className="Auth-form-container">
             <ToastContainer />
@@ -50,6 +58,7 @@ const SignUp = () => {
                             id="floatingInput"
                             placeholder="name@example.com"
                             name="email"
+                            required
                         />
                         <label htmlFor="floatingInput">Email address</label>
                     </div>
@@ -62,6 +71,8 @@ const SignUp = () => {
                             id="floatingPassword"
                             placeholder="Password"
                             name="password"
+                            minLength="6"
+                            required
                         />
                         <label htmlFor="floatingInput">Password</label>
                     </div>
@@ -73,13 +84,14 @@ const SignUp = () => {
                             className="form-control"
                             placeholder="Password"
                             name="passwordCheck"
+                            minLength="6"
+                            required
                         />
                         <label htmlFor="floatingInput">Repeat password</label>
                     </div>
 
                     <div className="d-grid gap-2 mt-3">
                         <button
-                            type="submit"
                             className="btn btn-primary"
                             onClick={registerHandler}
                             disabled={loading}
