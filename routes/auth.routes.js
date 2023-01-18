@@ -9,8 +9,11 @@ const router = Router();
 router.post(
     "/register",
     [
+        check("name", "Min length of name 2 symbols").isLength({min: 2}),
+        check("surname", "Min length of surname 2 symbols").isLength({min: 2}),
+        check("nameOfOrganization", "Min length of organization 2 symbols").isLength({min: 2}),
         check("email", "Incorrect email").isEmail(),
-        check("password", "Min length 6 symbols").isLength({min: 6}),
+        check("password", "Min length of password 6 symbols").isLength({min: 6}),
     ],
     async (req, res) => {
         try {
@@ -24,13 +27,14 @@ router.post(
                 })
             }
 
-            const {email, password} = req.body;
+            const {name, surname, nameOfOrganization, email, password} = req.body;
             const candidate = await User.findOne({email});
             if (candidate) {
                 return res.status(400).json({message: "Email already registered"})
             }
+
             const hashedPassword = await bcrypt.hash(password, 12)
-            const user = new User({email, password: hashedPassword})
+            const user = new User({name, surname, nameOfOrganization, email, password: hashedPassword})
 
             console.log(user)
             await user.save();

@@ -24,7 +24,8 @@ const SignUp = () => {
         setForm({...form, [event.target.name]: event.target.value})
     }
     const registerHandler = async () => {
-        if (form.password.length < 6 || form.passwordCheck.length < 6) {
+        if (form.password.length < 6 || form.passwordCheck.length < 6 ||
+            form.name.length < 2 || form.surname.length < 2 || form.nameOfOrganization.length < 2) {
             return 0;
         }
         if (form.password !== form.passwordCheck) {
@@ -33,7 +34,8 @@ const SignUp = () => {
         }
         try {
             const dataRegister = await request("/api/auth/register", "POST",
-                {"email": form.email, "password": form.password});
+                {"name": form.name, "surname": form.surname, "nameOfOrganization": form.nameOfOrganization,
+                    "email": form.email, "password": form.password});
             console.log(dataRegister);
             const dataLogin = await request("/api/auth/login", "POST",
                 {"email": form.email, "password": form.password});
@@ -58,6 +60,46 @@ const SignUp = () => {
                 <div className="Auth-form-content">
                     <img className="rounded mx-auto d-block" src={logo} alt=""/>
                     <h3 className="Auth-form-title">Sign Up</h3>
+
+                    <div className="form-floating">
+                        <input
+                            onChange={changeHandler}
+                            type="text"
+                            className="form-control"
+                            placeholder="Name"
+                            name="name"
+                            required
+                            minLength="2"
+                        />
+                        <label htmlFor="floatingInput">Name</label>
+                    </div>
+
+                    <div className="form-floating">
+                        <input
+                            onChange={changeHandler}
+                            type="text"
+                            className="form-control"
+                            placeholder="Surname"
+                            name="surname"
+                            required
+                            minLength="2"
+                        />
+                        <label htmlFor="floatingInput">Surname</label>
+                    </div>
+
+                    <div className="form-floating">
+                        <input
+                            onChange={changeHandler}
+                            type="text"
+                            className="form-control"
+                            placeholder="Name of Organization"
+                            name="nameOfOrganization"
+                            required
+                            minLength="2"
+                        />
+                        <label htmlFor="floatingInput">Name of Organization</label>
+                    </div>
+
                     <div className="form-floating">
                         <input
                             onChange={changeHandler}
