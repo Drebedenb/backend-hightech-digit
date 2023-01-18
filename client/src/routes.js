@@ -2,7 +2,7 @@ import {Route, Routes} from "react-router-dom"
 import Account from "./pages/Account/Account";
 import DetailPage from "./pages/DetailPage/DetailPage";
 import OrderPage from "./pages/OrderPage/OrderPage";
-import Main from "./pages/Main";
+import Main from "./pages/MainPage,js/Main";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 
