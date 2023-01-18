@@ -1,12 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import logo from '../../images/logo.png';
 import "./signUp.css";
 import {useHttp} from "../../hooks/http.hook";
 import {ToastContainer, toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {useNavigate} from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext";
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const auth = useContext(AuthContext);
     const {loading, request, error, clearError} = useHttp();
     const [form, setForm] = useState({
         name: "",
@@ -19,7 +23,7 @@ const SignUp = () => {
     const changeHandler = event => {
         setForm({...form, [event.target.name]: event.target.value})
     }
-    const registerHandler = async (event) => {
+    const registerHandler = async () => {
         if (form.password.length < 6 || form.passwordCheck.length < 6) {
             return 0;
         }
@@ -28,9 +32,13 @@ const SignUp = () => {
             return 0;
         }
         try {
-            const data = await request("/api/auth/register", "POST",
+            const dataRegister = await request("/api/auth/register", "POST",
                 {"email": form.email, "password": form.password});
-            console.log("Data", data);
+            console.log(dataRegister);
+            const dataLogin = await request("/api/auth/login", "POST",
+                {"email": form.email, "password": form.password});
+            auth.login(dataLogin.token, dataLogin.userId)
+            navigate("/", {replace: true});
         } catch (e) {
         }
     }
