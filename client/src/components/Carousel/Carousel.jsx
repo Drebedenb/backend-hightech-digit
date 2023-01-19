@@ -17,21 +17,21 @@ const Carousel = () => {
             <div className="carousel-inner">
                 <div className="carousel-item active">
                     <img src={technologies} className="d-block w-100" alt="..."/>
-                    <div className="carousel-caption d-none d-md-block text-end">
+                    <div className="carousel-caption d-md-block text-end">
                         <h1>Provide Internet and local networks</h1>
                         <p>Deliver Internet to anywhere in the world</p>
                     </div>
                 </div>
                 <div className="carousel-item">
                     <img src={technologies} className="d-block w-100" alt="..."/>
-                    <div className="carousel-caption d-none d-md-block text-end">
+                    <div className="carousel-caption d-md-block text-end">
                         <h1>Get Wi-Fi everywhere</h1>
                         <p>Stable connection and fastest speeds for you</p>
                     </div>
                 </div>
                 <div className="carousel-item">
                     <img src={technologies} className="d-block w-100" alt="..."/>
-                    <div className="carousel-caption d-none d-md-block text-end">
+                    <div className="carousel-caption d-md-block text-end">
                         <h1>Server work and analytics</h1>
                         <p>For those who think really out-the-box</p>
                     </div>
