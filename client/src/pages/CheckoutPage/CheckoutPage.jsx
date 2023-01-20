@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import logo from "../../images/logo.png"
 import {useLocation} from "react-router-dom";
+import {toast, ToastContainer} from "react-toastify";
+import styles from "./checkoutPage.module.css"
 
 const CheckoutPage = () => {
     const location = useLocation();
@@ -13,12 +15,14 @@ const CheckoutPage = () => {
     });
     const submitHandler = () => {
         if (form.country === "" || form.region === "" || form.address === "") {
+            toast.error("Input all data");
             return 0;
         }
     }
 
     return (
-        <div className="container">
+        <div className={"Auth-form-container container " + styles.AuthFormContainer}>
+            <ToastContainer />
             <main>
                 <div className="py-5 text-center">
                     <img className="d-block mx-auto mb-4" src={logo} alt=""
@@ -172,15 +176,6 @@ const CheckoutPage = () => {
                     </div>
                 </div>
             </main>
-
-            <footer className="my-5 pt-5 text-muted text-center text-small">
-                <p className="mb-1">© 2017–2022 HightechDigit</p>
-                <ul className="list-inline">
-                    {/*<li className="list-inline-item"><a href="#">Privacy</a></li>*/}
-                    {/*<li className="list-inline-item"><a href="#">Terms</a></li>*/}
-                    {/*<li className="list-inline-item"><a href="#">Support</a></li>*/}
-                </ul>
-            </footer>
         </div>
     );
 };
