@@ -1,14 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useContext, useEffect, useState} from 'react';
 import logo from '../../images/logo.png';
-import "./signUp.css";
+import "./signUpPage.css";
 import {useHttp} from "../../hooks/http.hook";
 import {ToastContainer, toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {NavLink, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
 
-const SignUp = () => {
+const SignUpPage = () => {
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
     const {loading, request, error, clearError} = useHttp();
@@ -158,4 +158,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SignUpPage;

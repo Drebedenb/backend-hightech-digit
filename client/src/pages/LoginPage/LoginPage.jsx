@@ -1,14 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useContext, useEffect, useState} from 'react';
 import logo from '../../images/logo.png';
-import "./login.css";
+import "./loginPage.css";
 import {useHttp} from "../../hooks/http.hook";
 import {toast, ToastContainer} from "react-toastify";
 import {AuthContext} from "../../context/AuthContext";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useLocation, useNavigate} from "react-router-dom";
 
-const Login = () => {
+const LoginPage = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location.state)
     const auth = useContext(AuthContext);
     const {loading, request, error, clearError} = useHttp();
     const [form, setForm] = useState({
@@ -89,4 +91,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default LoginPage;

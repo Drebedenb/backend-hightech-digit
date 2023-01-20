@@ -5,7 +5,7 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-   // comment so useEffect can't work twice
+   // comment ReactStrictMode and useEffect don't work twice
   <React.StrictMode>
       <App/>
   </React.StrictMode>

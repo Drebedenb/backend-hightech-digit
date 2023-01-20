@@ -1,21 +1,22 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import logo from "../../images/logo.png"
-import {OrdersContext} from "../../context/OrdersContext";
-import {useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 const CheckoutPage = () => {
-    const order = useContext(OrdersContext);
-    const navigate = useNavigate();
+    const location = useLocation();
+    const {name, price} = location.state;
+    console.log(name, price)
     const [form, setForm] = useState({
         country: "",
         region: "",
         address: ""
     });
-    useEffect(() => {
-        if (order.name === "") {
-            navigate("/", {replace: true});
+    const submitHandler = () => {
+        if (form.country === "" || form.region === "" || form.address === "") {
+            return 0;
         }
-    }, [order.name]);
+    }
+
     return (
         <div className="container">
             <main>
@@ -42,10 +43,10 @@ const CheckoutPage = () => {
                             </li>
                             <li className="list-group-item d-flex justify-content-between lh-sm">
                                 <div>
-                                    <h6 className="my-0">{order.name}</h6>
+                                    <h6 className="my-0">{name}</h6>
                                     <small className="text-muted">Price can be changed by different factor</small>
                                 </div>
-                                <span className="text-muted">{order.price}$</span>
+                                <span className="text-muted">{price}$</span>
                             </li>
                             <li className="list-group-item d-flex justify-content-between lh-sm">
                                 <div>
@@ -57,7 +58,7 @@ const CheckoutPage = () => {
                             </li>
                             <li className="list-group-item d-flex justify-content-between">
                                 <span>Total (USD)</span>
-                                <strong>{200 + order.price}$</strong>
+                                <strong>{200 + price}$</strong>
                             </li>
                         </ul>
                     </div>
@@ -160,7 +161,11 @@ const CheckoutPage = () => {
                             <hr className="my-4"/>
 
 
-                            <button className="w-100 btn btn-primary btn-lg" type="submit">
+                            <button
+                                onClick={submitHandler}
+                                className="w-100 btn btn-primary btn-lg"
+                                type="submit"
+                            >
                                 Buy
                             </button>
                         </form>
@@ -171,9 +176,9 @@ const CheckoutPage = () => {
             <footer className="my-5 pt-5 text-muted text-center text-small">
                 <p className="mb-1">© 2017–2022 HightechDigit</p>
                 <ul className="list-inline">
-                    <li className="list-inline-item"><a href="#">Privacy</a></li>
-                    <li className="list-inline-item"><a href="#">Terms</a></li>
-                    <li className="list-inline-item"><a href="#">Support</a></li>
+                    {/*<li className="list-inline-item"><a href="#">Privacy</a></li>*/}
+                    {/*<li className="list-inline-item"><a href="#">Terms</a></li>*/}
+                    {/*<li className="list-inline-item"><a href="#">Support</a></li>*/}
                 </ul>
             </footer>
         </div>

@@ -1,16 +1,18 @@
 import React, {useContext} from 'react';
 import laptop from "../../images/laptop.webp"
 import {useNavigate} from "react-router-dom";
-import {OrdersContext} from "../../context/OrdersContext";
+import {AuthContext} from "../../context/AuthContext";
 
 const Hero = ({name, price, description}) => {
-    const product = useContext(OrdersContext);
+    const auth = useContext(AuthContext);
     const navigate = useNavigate();
 
     const clickHandler = () => {
-        product.toggleName(name);
-        product.togglePrice(price);
-        navigate("/checkout", {replace: true});
+        if (auth.isAuthenticated){
+            navigate("/checkout", {state: {"name": name, "price": price}});
+        } else {
+            navigate("/login");
+        }
     }
     return (
         <div className="container my-5">
