@@ -1,13 +1,17 @@
 import React from 'react';
 import Header from "../../components/Header/Header";
 import Carousel from "../../components/Carousel/Carousel";
-import Cards from "../../components/Cards";
 import "./main.css"
 import PictureDeals from "../../components/PictureDeals/PictureDeals";
 import Circles from "../../components/Circles/Circles";
 import Hero from "../../components/Hero/Hero";
 
 const Main = () => {
+    const heroes = [                            //TODO: add in database
+        {id: 1, name: "Provide Internet and local networks", price:"10000$", description: "Deliver Internet to anywhere in the world"},
+        {id: 2, name: "Get Wi-Fi everywhere", price:"15000$", description: "Stable connection and fastest speeds for you"},
+        {id: 3, name: "Server work and analytics", price:"20000$", description: "For those who think really out-the-box"}
+    ]
     return (
         <div className="main text-bg-dark">
             <Header/>
@@ -15,11 +19,8 @@ const Main = () => {
             <div className="container marketing">
                 <Circles/>
             </div>
-            <Hero/>
-            <Hero/>
-            <Hero/>
+            {heroes.map(item => <Hero name={item.name} price={item.price} description={item.description} key={item.id}/>)}
             {/*<PictureDeals/>*/}
-            <Cards/>
         </div>
     );
 };

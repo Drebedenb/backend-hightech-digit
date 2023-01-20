@@ -20,6 +20,7 @@ const Carousel = () => {
                     <div className="carousel-caption d-md-block text-end">
                         <h1>Provide Internet and local networks</h1>
                         <p>Deliver Internet to anywhere in the world</p>
+                        <button type="button" className="btn btn-outline-light btn-lg px-4">Make it fast</button>
                     </div>
                 </div>
                 <div className="carousel-item">
@@ -27,6 +28,7 @@ const Carousel = () => {
                     <div className="carousel-caption d-md-block text-end">
                         <h1>Get Wi-Fi everywhere</h1>
                         <p>Stable connection and fastest speeds for you</p>
+                        <button type="button" className="btn btn-outline-light btn-lg px-4">Set connection</button>
                     </div>
                 </div>
                 <div className="carousel-item">
@@ -34,6 +36,7 @@ const Carousel = () => {
                     <div className="carousel-caption d-md-block text-end">
                         <h1>Server work and analytics</h1>
                         <p>For those who think really out-the-box</p>
+                        <button type="button" className="btn btn-outline-light btn-lg px-4">Provide</button>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,8 @@
 import {Route, Routes} from "react-router-dom"
 import Account from "./pages/Account/Account";
 import DetailPage from "./pages/DetailPage/DetailPage";
-import OrderPage from "./pages/OrderPage/OrderPage";
-import Main from "./pages/MainPage,js/Main";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import Main from "./pages/MainPage/Main";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 
@@ -14,7 +14,8 @@ export const useRoutes = isAuthenticated => {
                 <Route path="/" element={<Main/>}/>
                 <Route path="/account" element={<Account/>}/>
                 <Route path="/orders" element={<DetailPage/>}/>
-                <Route path="/order/:id" element={<OrderPage/>}/>
+                <Route path="/order/:id" element={<CheckoutPage/>}/>
+                <Route path="/checkout" element={<CheckoutPage/>}/>
             </Routes>
 
         )

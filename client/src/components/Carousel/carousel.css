@@ -2,6 +2,9 @@
 /*    height: 500px;*/
 /*}*/
 
+.carousel {
+    margin-bottom: 4rem;
+}
 .carousel-caption {
     margin-bottom: 25%;
 }

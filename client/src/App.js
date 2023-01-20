@@ -1,31 +1,29 @@
-import React, {createContext, useState} from "react"
+import React, {useState} from "react"
 import {BrowserRouter} from "react-router-dom";
 import {useRoutes} from "./routes";
 import {useAuth} from "./hooks/auth.hook";
 import {AuthContext} from "./context/AuthContext";
+import {OrdersContext} from "./context/OrdersContext";
 
-let data = [{id: 1, name: "phone", price: 500},
-    {id: 2, name: "notebook", price: 1000},
-    {id: 3, name: "pc", price: 1000},
-    {id: 4, name: "digital watch", price: 200}];
-
-export const ProductsContext = createContext(null);
 
 function App() {
-    const [cards, setCards] = useState(data);
+    const [nameState, setName] = useState("fd")
+    const [priceState, setPrice] = useState("100")
     const {token, login, logout, userId} = useAuth();
     const isAuthenticated = !!token;
     const routes = useRoutes(isAuthenticated);
 
+
+
     return (
         <AuthContext.Provider value={{token, login, logout, userId, isAuthenticated}}>
-            <ProductsContext.Provider value={{cards, setCards}}>
+            <OrdersContext.Provider value={{name: nameState, price: priceState, toggleName: setName, togglePrice: setPrice}}>
                 <BrowserRouter>
                     <div className="App">
                         {routes}
                     </div>
                 </BrowserRouter>
-            </ProductsContext.Provider>
+            </OrdersContext.Provider>
         </AuthContext.Provider>
     );
 }

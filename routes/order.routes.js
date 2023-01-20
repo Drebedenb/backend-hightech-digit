@@ -1,12 +1,10 @@
 const {Router} = require("express")
-const config = require("config")
 const Order = require("../models/Order")
 const router = Router();
 const auth = require("../middleware/auth.middleware")
 
 router.post("/generate", auth ,async (req, res) => {
     try {
-        const baseUrl = config.get("baseUrl");
         const {name, price, address, addition} = req.body;
         const readiness = "Need half pay";
 
