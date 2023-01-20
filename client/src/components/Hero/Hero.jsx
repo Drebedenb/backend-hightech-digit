@@ -20,7 +20,7 @@ const Hero = ({name, price, description}) => {
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid asperiores distinctio, dolore
                         excepturi explicabo libero magnam magni minima nemo nulla, numquam odit, omnis porro provident
                         ratione saepe suscipit velit voluptatem. {description}</p>
-                    <p className="lead">{price}</p>
+                    <p className="lead">{price}$</p>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                         <button
                             type="button"

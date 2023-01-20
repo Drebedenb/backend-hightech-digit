@@ -8,9 +8,9 @@ import Hero from "../../components/Hero/Hero";
 
 const Main = () => {
     const heroes = [                            //TODO: add in database
-        {id: 1, name: "Provide Internet and local networks", price:"10000$", description: "Deliver Internet to anywhere in the world"},
-        {id: 2, name: "Get Wi-Fi everywhere", price:"15000$", description: "Stable connection and fastest speeds for you"},
-        {id: 3, name: "Server work and analytics", price:"20000$", description: "For those who think really out-the-box"}
+        {id: 1, name: "Provide Internet and local networks", price:1000, description: "Deliver Internet to anywhere in the world"},
+        {id: 2, name: "Get Wi-Fi everywhere", price:1500, description: "Stable connection and fastest speeds for you"},
+        {id: 3, name: "Server work and analytics", price:2000, description: "For those who think really out-the-box"}
     ]
     return (
         <div className="main text-bg-dark">

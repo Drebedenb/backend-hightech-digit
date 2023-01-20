@@ -5,7 +5,7 @@ import "./signUp.css";
 import {useHttp} from "../../hooks/http.hook";
 import {ToastContainer, toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
 
 const SignUp = () => {
@@ -148,6 +148,9 @@ const SignUp = () => {
                         >
                             Sign Up
                         </button>
+                    </div>
+                    <div className="mt-2">
+                        Already registered? <NavLink to="/login" className="btn btn-outline-secondary me-2">Login</NavLink>
                     </div>
                 </div>
             </form>

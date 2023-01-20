@@ -7,12 +7,12 @@ import {OrdersContext} from "./context/OrdersContext";
 
 
 function App() {
-    const [nameState, setName] = useState("fd")
-    const [priceState, setPrice] = useState("100")
+    const [nameState, setName] = useState("")
+    const [priceState, setPrice] = useState("")
+
     const {token, login, logout, userId} = useAuth();
     const isAuthenticated = !!token;
     const routes = useRoutes(isAuthenticated);
-
 
 
     return (

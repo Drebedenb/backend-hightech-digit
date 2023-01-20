@@ -5,7 +5,7 @@ import "./login.css";
 import {useHttp} from "../../hooks/http.hook";
 import {toast, ToastContainer} from "react-toastify";
 import {AuthContext} from "../../context/AuthContext";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -52,6 +52,7 @@ const Login = () => {
                             id="floatingInput"
                             placeholder="name@example.com"
                             name="email"
+                            value={form.email}
                         />
                         <label htmlFor="floatingInput">Email address</label>
                     </div>
@@ -63,6 +64,7 @@ const Login = () => {
                             id="floatingPassword"
                             placeholder="Password"
                             name="password"
+                            value={form.password}
                         />
                         <label htmlFor="floatingInput">Password</label>
                     </div>
@@ -76,7 +78,10 @@ const Login = () => {
                         </button>
                     </div>
                     <p className="forgot-password text-right mt-2">
-                        Forgot a password?
+                        Don't have an account yet?
+                        <div>
+                            <NavLink to="/signUp" type="button" className="btn btn-warning">Sign-up</NavLink>
+                        </div>
                     </p>
                 </div>
             </form>
