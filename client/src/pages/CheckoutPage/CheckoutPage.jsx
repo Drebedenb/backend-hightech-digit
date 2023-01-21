@@ -1,28 +1,42 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import logo from "../../images/logo.png"
-import {useLocation} from "react-router-dom";
-import {toast, ToastContainer} from "react-toastify";
-import styles from "./checkoutPage.module.css"
+import {useLocation, useNavigate} from "react-router-dom";
+// import styles from "./checkoutPage.module.css"
+import {useHttp} from "../../hooks/http.hook";
+import {AuthContext} from "../../context/AuthContext";
 
 const CheckoutPage = () => {
+    const navigate = useNavigate();
+    const auth = useContext(AuthContext);
     const location = useLocation();
     const {name, price} = location.state;
-    console.log(name, price)
+    const {loading, request} = useHttp();
     const [form, setForm] = useState({
         country: "",
         region: "",
-        address: ""
+        address: "",
+        addition: ""
     });
-    const submitHandler = () => {
+    const submitHandler = async (event) => {
+        event.preventDefault();
         if (form.country === "" || form.region === "" || form.address === "") {
-            toast.error("Input all data");
             return 0;
+        }
+        const addressCountryRegion = form.country + ", " + form.region + ", " + form.address;
+        try {
+            const dataOrder = await request("/api/order/generate", "POST",
+                {"name": name, "price": price,
+                    "address": addressCountryRegion, "addition": form.addition},
+                {authorization: `Bearer ${auth.token}`});
+            console.log(dataOrder);
+            navigate("/", {replace: true});
+        } catch (e) {
+            console.log(e);
         }
     }
 
     return (
-        <div className={"Auth-form-container container " + styles.AuthFormContainer}>
-            <ToastContainer />
+        <div className={" Auth-form-container container "} style={{alignItems: "start"}}>
             <main>
                 <div className="py-5 text-center">
                     <img className="d-block mx-auto mb-4" src={logo} alt=""
@@ -68,7 +82,7 @@ const CheckoutPage = () => {
                     </div>
                     <div className="col-md-7 col-lg-8">
                         <h4 className="mb-3">Billing address</h4>
-                        <form className="needs-validation" noValidate="">
+                        <form className="needs-validation">
                             <div className="row g-3">
 
                                 {/*<div className="col-sm-6">*/}
@@ -103,13 +117,10 @@ const CheckoutPage = () => {
                                     <label htmlFor="country" className="form-label">Country</label>
                                     <select value={form.country}
                                             onChange={e => setForm({...form, country: e.target.value})}
-                                            className="form-select" id="country" required="">
+                                            className="form-select" id="country" required>
                                         <option value="">Choose...</option>
                                         <option>Russia</option>
                                     </select>
-                                    <div className="invalid-feedback">
-                                        Please select a valid country.
-                                    </div>
                                 </div>
 
                                 <div className="col-md-4">
@@ -119,16 +130,13 @@ const CheckoutPage = () => {
                                         onChange={e => setForm({...form, region: e.target.value})}
                                         className="form-select"
                                         id="state"
-                                        required=""
+                                        required
                                     >
                                         <option value="">Choose...</option>
                                         <option>Moscow</option>
                                         <option>Moscow region</option>
                                         <option>Saint-Petersburg</option>
                                     </select>
-                                    <div className="invalid-feedback">
-                                        Please provide a valid state.
-                                    </div>
                                 </div>
                             </div>
 
@@ -140,11 +148,21 @@ const CheckoutPage = () => {
                                     type="text"
                                     className="form-control"
                                     id="address"
-                                    placeholder="Ivanovskaya street, 45 house, 13"
-                                    required=""/>
-                                <div className="invalid-feedback">
-                                    Please enter your shipping address.
-                                </div>
+                                    placeholder="Kovalevskaya street, 45 house, 13"
+                                    minLength="2"
+                                    required/>
+                            </div>
+
+                            <div className="col-12">
+                                <label htmlFor="addition" className="form-label">Addition(optional)</label>
+                                <input
+                                    value={form.addition}
+                                    onChange={e => setForm({...form, addition: e.target.value})}
+                                    type="text"
+                                    className="form-control"
+                                    id="addition"
+                                    placeholder="Call 3 hours before arrival."
+                                />
                             </div>
 
                             <hr className="my-4"/>
@@ -168,7 +186,7 @@ const CheckoutPage = () => {
                             <button
                                 onClick={submitHandler}
                                 className="w-100 btn btn-primary btn-lg"
-                                type="submit"
+                                disabled={loading}
                             >
                                 Buy
                             </button>

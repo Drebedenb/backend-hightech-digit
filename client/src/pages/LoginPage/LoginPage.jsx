@@ -5,12 +5,10 @@ import "./loginPage.css";
 import {useHttp} from "../../hooks/http.hook";
 import {toast, ToastContainer} from "react-toastify";
 import {AuthContext} from "../../context/AuthContext";
-import {NavLink, useLocation, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 const LoginPage = () => {
     const navigate = useNavigate();
-    const location = useLocation();
-    console.log(location.state)
     const auth = useContext(AuthContext);
     const {loading, request, error, clearError} = useHttp();
     const [form, setForm] = useState({
@@ -81,9 +79,7 @@ const LoginPage = () => {
                     </div>
                     <p className="forgot-password text-right mt-2">
                         Don't have an account yet?
-                        <div>
                             <NavLink to="/signUp" type="button" className="btn btn-warning">Sign-up</NavLink>
-                        </div>
                     </p>
                 </div>
             </form>
