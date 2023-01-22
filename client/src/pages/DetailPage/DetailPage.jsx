@@ -4,6 +4,7 @@ import {useHttp} from "../../hooks/http.hook";
 import {AuthContext} from "../../context/AuthContext";
 import Loader from "../../components/Loader/Loader";
 import OrderCard from "../../components/OrderCard/OrderCard";
+import Header from "../../components/Header/Header";
 
 const DetailPage = () => {
     const {token} = useContext(AuthContext);
@@ -31,7 +32,8 @@ const DetailPage = () => {
     }
 
     return (
-        <div>
+        <div className="text-bg-dark vh-100">
+            <Header/>
             { !loading && order && <OrderCard order={order}/>}
         </div>
     );
