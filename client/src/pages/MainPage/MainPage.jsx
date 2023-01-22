@@ -13,7 +13,8 @@ const MainPage = () => {
         {id: 3, name: "Server work and analytics", price:2000, description: "For those who think really out-the-box"}
     ]
     return (
-        <div className="main text-bg-dark">
+        //Do not delete border-bottom and bottom-dark because you will have white stripe in bottom of page
+        <div className="main text-bg-dark border-bottom border-dark">
             <Header/>
             <Carousel/>
             <div className="container marketing">

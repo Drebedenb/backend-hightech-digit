@@ -1,10 +1,38 @@
-import React from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
+import {useParams} from "react-router-dom";
+import {useHttp} from "../../hooks/http.hook";
+import {AuthContext} from "../../context/AuthContext";
+import Loader from "../../components/Loader/Loader";
+import OrderCard from "../../components/OrderCard/OrderCard";
 
 const DetailPage = () => {
-    // const [order, setOrder] = useState(null)
+    const {token} = useContext(AuthContext);
+    const {request, loading} = useHttp();
+    const [order, setOrder] = useState(null)
+    const orderId = useParams().id;
+
+    const getOrder = useCallback(async () => {
+        try {
+            const data = await request(`/api/order/${orderId}`, "GET", null, {
+                authorization: `Bearer ${token}`
+            })
+            setOrder(data);
+        } catch (e) {
+            console.log(e)
+        }
+    }, [token, orderId, request])
+
+    useEffect(() => {
+        getOrder();
+    }, [getOrder])
+
+    if (loading) {
+        return <Loader/>
+    }
+
     return (
         <div>
-            Detail Page
+            { !loading && order && <OrderCard order={order}/>}
         </div>
     );
 };

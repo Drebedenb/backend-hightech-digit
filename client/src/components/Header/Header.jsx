@@ -39,7 +39,7 @@ const Header = () => {
                         {auth.isAuthenticated
                             ?
                             <div className="text-end">
-                                <NavLink to="/account" className="btn btn-outline-light me-2">{auth.name}'s account</NavLink>
+                                <NavLink to="/account" className="btn btn-outline-light me-2">Your account</NavLink>
                                 <button onClick={auth.logout} type="button" className="btn btn-outline-danger">Log out</button>
                             </div>
                             :
