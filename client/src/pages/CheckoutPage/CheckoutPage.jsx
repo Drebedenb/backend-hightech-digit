@@ -29,7 +29,7 @@ const CheckoutPage = () => {
                     "address": addressCountryRegion, "addition": form.addition},
                 {authorization: `Bearer ${auth.token}`});
             console.log(dataOrder);
-            navigate("/", {replace: true});
+            navigate(`/order/${dataOrder.order._id}`, {replace: true});
         } catch (e) {
             console.log(e);
         }

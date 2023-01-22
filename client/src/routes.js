@@ -13,7 +13,7 @@ export const useRoutes = isAuthenticated => {
             <Routes>
                 <Route path="/" element={<MainPage/>}/>
                 <Route path="/account" element={<AccountPage/>}/>
-                <Route path="/orders" element={<DetailPage/>}/>
+                <Route path="/order/:id" element={<DetailPage/>}/>
                 <Route path="/checkout" element={<CheckoutPage/>}/>
             </Routes>
 

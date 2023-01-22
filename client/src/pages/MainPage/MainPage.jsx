@@ -4,6 +4,7 @@ import Carousel from "../../components/Carousel/Carousel";
 import "./mainPage.css"
 import Circles from "../../components/Circles/Circles";
 import Hero from "../../components/Hero/Hero";
+import Footer from "../../components/Footer/Footer";
 
 const MainPage = () => {
     const heroes = [                            //TODO: add in database
@@ -20,6 +21,7 @@ const MainPage = () => {
             </div>
             {heroes.map(item => <Hero name={item.name} price={item.price} description={item.description} key={item.id}/>)}
             {/*<PictureDeals/>*/}
+            <Footer/>
         </div>
     );
 };
