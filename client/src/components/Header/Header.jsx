@@ -25,10 +25,6 @@ const Header = () => {
                                    className="nav-link px-2 text-white">Features</a></li>
                             <li><a href="frontend-hightech-digit/src/components/Header/Header#"
                                    className="nav-link px-2 text-white">Pricing</a></li>
-                            <li><a href="frontend-hightech-digit/src/components/Header/Header#"
-                                   className="nav-link px-2 text-white">FAQs</a></li>
-                            <li><a href="frontend-hightech-digit/src/components/Header/Header#"
-                                   className="nav-link px-2 text-white">About</a></li>
                         </ul>
 
                         <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
