@@ -5,6 +5,7 @@ import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import MainPage from "./pages/MainPage/MainPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import SchemaRecognizePage from "./pages/SchemaRecognizePage/SchemaRecognizePage";
 
 
 export const useRoutes = isAuthenticated => {
@@ -15,6 +16,7 @@ export const useRoutes = isAuthenticated => {
                 <Route path="/account" element={<AccountPage/>}/>
                 <Route path="/order/:id" element={<DetailPage/>}/>
                 <Route path="/checkout" element={<CheckoutPage/>}/>
+                <Route path="/schema" element={<SchemaRecognizePage/>}/>
             </Routes>
 
         )
